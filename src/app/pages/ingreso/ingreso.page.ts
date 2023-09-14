@@ -32,7 +32,7 @@ export class IngresoPage implements OnInit {
     */
   }
 
- 
+
   public ingresar(): void {
 
     if(!this.validarUsuario(this.usuario)) {

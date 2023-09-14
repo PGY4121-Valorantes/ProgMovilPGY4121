@@ -6,7 +6,11 @@ export class Usuario {
   public respuestaSecreta = '';
 
   constructor(
-    correo: string, password: string, nombre: string, preguntaSecreta: string, respuestaSecreta: string)
+    correo: string,
+    password: string,
+    nombre: string,
+    preguntaSecreta: string,
+    respuestaSecreta: string)
   {
     this.correo = correo;
     this.password = password;
@@ -35,6 +39,16 @@ export class Usuario {
       return null;
     }
   }
+  
+  public buscarUsuarioPorCorreo(correo: string): Usuario | undefined {
+    const usuarioEncontrado = this.listaUsuariosValidos().find(
+      usu => usu.correo === correo);
+
+      return usuarioEncontrado;
+      
+  }
+
+  
 
   public validarcorreo(): string {
     if (this.correo.trim() === '') {

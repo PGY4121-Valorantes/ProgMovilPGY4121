@@ -11,9 +11,25 @@ export class CorreoPage implements OnInit {
 
   public correo: string = '';
 
-  constructor (private router: Router) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
+  }
+
+  public ingresarPaginaValidarRespuestaSecreta(): void {
+    const usuario = new Usuario('', '', '', '', '');
+    const usuarioEncontrado = usuario.buscarUsuarioPorCorreo(this.correo);
+    if (!usuarioEncontrado) {
+      alert('El correo no está dentro de las cuentas válidas del sistema.');
+    }
+    else {
+      const navigationExtras: NavigationExtras = {
+        state: {
+          usuario: usuarioEncontrado
+        }
+      };
+      this.router.navigate(['/pregunta'], navigationExtras);
+    }
   }
 
 

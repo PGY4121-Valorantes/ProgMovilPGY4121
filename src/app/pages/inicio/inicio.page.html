@@ -7,10 +7,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-title class="ion-padding-top ion-text-center" #bienvenido>
-      <ion-label>
-        <h1>¡Bienvenido!</h1>
-      </ion-label>
-    </ion-title>
+
+  <ion-button *ngIf="!escaneando" (click)="comenzarEscaneoQR()" expand="full" shape="round">
+    <ion-icon slot="start" name="videocam-outline"></ion-icon>
+    Comenzar Escaneo de QR
+  </ion-button>
+
+  <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()" expand="full" shape="round">
+    <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
+    Detener escaneo de QR
+  </ion-button>
+
+  <video #video [hidden]="!escaneando" width="100%"></video>
+  <canvas #canvas hidden></canvas>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Código QR</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <br>
+      Datos: {{ datosQR }}
+      <br><br>
+      Escaneando: {{ escaneando }}
+      <br>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
