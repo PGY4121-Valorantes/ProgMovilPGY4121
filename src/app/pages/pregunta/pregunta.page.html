@@ -1,8 +1,8 @@
 <ion-content>
-<img src="./assets/icon/logo_duoc.png">
+<img class="pantalla-con-padding-horizontal" src="./assets/icon/logo_duoc.png">
 
 
-  <ion-title class="ion-padding-top ion-text-center">
+  <ion-title class="ion-padding-top ion-text-center pantalla-con-padding-horizontal">
     <ion-label>
       <h1>Sistema de Asistencia</h1>
       <h1>Duoc UC</h1>
@@ -11,15 +11,19 @@
   </ion-title>
 
 
-  <ion-content>
-    <ion-card>
-      <ion-card-subtitle class="ion-text-center"> Recuperar contraseña </ion-card-subtitle>
+
+    <ion-card class="fondo-card pantalla-con-padding-horizontal">
       <br>
-      <ion-card-subtitle class="ion-text-center"> Paso 2: Responde la pregunta secreta</ion-card-subtitle>
+      <ion-card-subtitle class="ion-text-center texto-2"> Recuperar contraseña </ion-card-subtitle>
       <br>
-      <ion-card-subtitle>Ingresa tu respuesta</ion-card-subtitle>
-      <ion-input type="text" [(ngModel)]="respuesta" placeholder="Escribe aquí tu respuesta"></ion-input>
+      <ion-card-subtitle class="ion-text-center texto-2"> Paso 2: Responde la pregunta secreta</ion-card-subtitle>
+      <br>
+      <h3 class="ion-text-center texto-2">{{ this.usuario.preguntaSecreta }}</h3>
+      <ion-input class="texto-2" type="text" [(ngModel)]="respuesta" placeholder="Escribe aquí tu respuesta"></ion-input>
       <ion-button shape="block" (click)="validarRespuestaSecreta()">Recuperar contraseña</ion-button>
     </ion-card>
-  </ion-content>
+    <div class="ion-padding-top ion-text-center">
+      <a class="texto-2" routerLink="/ingreso"> Iniciar sesión </a>
+    </div>
+
 </ion-content>

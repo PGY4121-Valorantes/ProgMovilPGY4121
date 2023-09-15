@@ -1,32 +1,28 @@
 <ion-content>
-  <img src="./assets/icon/logo_duoc.png">
-
-
-  <ion-title class="ion-padding-top ion-text-center">
-    <ion-label>
-      <h1>Sistema de Asistencia Duoc UC</h1>
-    </ion-label>
-  </ion-title>
-    <div class="ion-padding-vertical">
-      <ion-card>
-
+  <img class="pantalla-con-padding-horizontal" src="./assets/icon/logo_duoc.png">
+  
+  
+    <ion-title class="ion-padding-top ion-text-center pantalla-con-padding-horizontal">
+      <ion-label>
+        <h1 class="texto">Sistema de Asistencia</h1>
+        <h1 class="texto">Duoc UC</h1>
         <br>
-        <ion-card-subtitle class="ion-text-center"> Recuperar contraseña </ion-card-subtitle>
+      </ion-label>
+    </ion-title>
+  
+  
+
+      <ion-card class="pantalla-con-padding-horizontal fondo-card">
+        <ion-card-subtitle class="ion-text-center texto-2"> Recuperar contraseña </ion-card-subtitle>
         <br>
-        <div class="ion-text-center">
-        <img src="./assets/icon/funciona.png" width="150 px" height="115 px">
-      </div>
-        <ion-col size="12">
-     
-      <ion-title class="ion-padding-top ion-text-center">
-        <ion-label>
-          <h1>¡Correcto!</h1>
-          <br>
-          <h1>Tu contraseña es: [...]</h1>
-        </ion-label>
-      </ion-title>
-       </ion-col>
+        <ion-card-subtitle class="ion-text-center texto-2"> ¡Correcto!</ion-card-subtitle>
+        <br>
+        <ion-card-subtitle class="ion-text-center texto-2">Tu contraseña es </ion-card-subtitle>
+        <br>
+        <br>
       </ion-card>
       <div class="ion-padding-top ion-text-center">
-        <a routerLink="/ingreso"> Iniciar sesión </a>
+        <a class="texto-2" routerLink="/ingreso"> Iniciar sesión </a>
       </div>
+  </ion-content>
+  

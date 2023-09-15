@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="">
+  <ion-toolbar>
     <ion-title #titulo>
       <img src="./assets/icon/logo_duoc.png" width="280 px" height="65 px">
     </ion-title>
@@ -8,6 +8,11 @@
 
 <ion-content [fullscreen]="true">
 
+<div class="ion-padding-vertical ion-text-center">
+  <h1 class="texto-2">¡Bienvenido!</h1>
+  <br>
+  <h1></h1>
+</div>
   <ion-button *ngIf="!escaneando" (click)="comenzarEscaneoQR()" expand="full" shape="round">
     <ion-icon slot="start" name="videocam-outline"></ion-icon>
     Comenzar Escaneo de QR
