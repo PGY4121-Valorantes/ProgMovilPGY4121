@@ -1,0 +1,12 @@
+{
+  "description": "An Ionic project",
+  "jshintCOnfig": {
+    "esversion": 6
+  },
+  "extends": "../tsconfig.json",
+  "include": ["**/*.ts"],
+  "compilerOptions": {
+    "sourceMap": false,
+    "types": ["cypress"]
+  }
+}
