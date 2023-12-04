@@ -1,42 +1,48 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar color="">
     <ion-title #titulo>
-      <img src="./assets/icon/logo_duoc.png" width="280 px" height="65 px">
+      <img src="./assets/images/logo_duoc.png" width="280 px" height="65 px">
     </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="componente_actual"  (ngModelChange)="cambiarComponente($event)">
+      
+      <ion-segment-button id="qr" value="qr">
+        <h3>QR</h3>
+      </ion-segment-button>
+
+      <ion-segment-button id="miclase" value="miclase">
+        <h3>Mi clase</h3>
+      </ion-segment-button>
+
+      <ion-segment-button id="foro" value="foro">
+        <h3>Foro</h3>
+      </ion-segment-button>
+
+      <ion-segment-button id="misdatos" value="misdatos">
+        <h3>Mis datos</h3>
+      </ion-segment-button>
+
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
-<div class="ion-padding-vertical ion-text-center">
-  <h1 class="texto-2">¡Bienvenido!</h1>
-  <br>
-  <h1></h1>
-</div>
-  <ion-button *ngIf="!escaneando" (click)="comenzarEscaneoQR()" expand="full" shape="round">
-    <ion-icon slot="start" name="videocam-outline"></ion-icon>
-    Comenzar Escaneo de QR
-  </ion-button>
+  <app-qr [hidden]="componente_actual !== 'qr'" (qrCapturado)="cambiarComponente('miclase')"></app-qr>
 
-  <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()" expand="full" shape="round">
-    <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
-    Detener escaneo de QR
-  </ion-button>
+  <app-miclase [hidden]="componente_actual !== 'miclase'"></app-miclase>
 
-  <video #video [hidden]="!escaneando" width="100%"></video>
-  <canvas #canvas hidden></canvas>
+  <app-foro [hidden]="componente_actual !== 'foro'"></app-foro>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Código QR</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <br>
-      Datos: {{ datosQR }}
-      <br><br>
-      Escaneando: {{ escaneando }}
-      <br>
-    </ion-card-content>
-  </ion-card>
+  <app-misdatos [hidden]="componente_actual !== 'misdatos'"></app-misdatos>
+  
 </ion-content>
 
+<ion-footer>
+  <ion-toolbar>
+    <ion-button id="boton-salir" (click)="cerrarSesion()" expand="block" fill="clear" shape="round">
+      Cerrar sesión
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

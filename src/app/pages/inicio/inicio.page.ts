@@ -1,33 +1,41 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { AnimationController, LoadingController } from '@ionic/angular';
-import jsQR, { QRCode } from 'jsqr';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AnimationController, IonicModule } from '@ionic/angular';
+import { QrComponent } from 'src/app/components/qr/qr.component';
+import { MiclaseComponent } from 'src/app/components/miclase/miclase.component';
+import { ForoComponent } from 'src/app/components/foro/foro.component';
+import { MisdatosComponent } from 'src/app/components/misdatos/misdatos.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { DataBaseService } from 'src/app/services/data-base.service';
+import { ApiClientService } from 'src/app/services/api-client.service';
 
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule,
+  QrComponent, MiclaseComponent, ForoComponent, MisdatosComponent]
 })
-export class InicioPage implements AfterViewInit {
+export class InicioPage implements OnInit {
 
-  @ViewChild('itemTitulo', { static: false })
-  private itemTitulo!: ElementRef;
+  @ViewChild('titulo', { read: ElementRef }) itemTitulo!: ElementRef;
 
-  @ViewChild('video', { static: false })
-  private video!: ElementRef;
+  componente_actual = 'qr';
 
-  @ViewChild('canvas', { static: false })
-  private canvas!: ElementRef;
+  constructor(
+    private authService: AuthService, 
+    private bd: DataBaseService,
+    private api: ApiClientService,
+    private animationController: AnimationController) { }
 
-  @ViewChild('fileinput', { static: false })
-  private fileinput!: ElementRef;
-
-  public escaneando = false;
-  public datosQR = '';
-
-  public constructor(private loadingController: LoadingController,
-    private animationController: AnimationController) {
-
+  ngOnInit() {
+    this.authService.primerInicioSesion.subscribe(esPrimerInicioSesion => {
+      this.componente_actual = 'qr';
+      this.bd.datosQR.next('');
+    });
   }
 
   public ngAfterViewInit(): void {
@@ -44,66 +52,14 @@ export class InicioPage implements AfterViewInit {
     }
   }
 
-  public limpiarDatos(): void {
-    this.escaneando = false;
-    this.datosQR = '';
+  cambiarComponente(nombreComponente: string) {
+    this.componente_actual = nombreComponente;
+    if (nombreComponente === 'foro') this.api.cargarPublicaciones();
+    if (nombreComponente === 'misdatos') this.authService.leerUsuarioAutenticado();
   }
 
-  public async comenzarEscaneoQR() {
-    this.limpiarDatos();
-    const mediaProvider: MediaProvider = await navigator.mediaDevices.getUserMedia({
-      video: {facingMode: 'environment'}
-    });
-    this.video.nativeElement.srcObject = mediaProvider;
-    this.video.nativeElement.setAttribute('playsinline', 'true');
-    this.video.nativeElement.play();
-    requestAnimationFrame(this.verificarVideo.bind(this));
-  }
-  
-  public detenerEscaneoQR(): void {
-    this.escaneando = false;
-  }
-
-  async verificarVideo() {
-    if (this.video.nativeElement.readyState === this.video.nativeElement.HAVE_ENOUGH_DATA) {
-      this.escaneando = true;
-
-      if (this.obtenerDatosQR()) {
-        console.log(1);
-      } else {
-        if (this.escaneando) {
-          console.log(2);
-          requestAnimationFrame(this.verificarVideo.bind(this));
-        }
-      }
-    } else {
-      console.log(3);
-      requestAnimationFrame(this.verificarVideo.bind(this));
-    }
-  }
-
-  public obtenerDatosQR(source?: CanvasImageSource): boolean {
-    let w = 0;
-    let h = 0;
-    if (!source) {
-      this.canvas.nativeElement.width = this.video.nativeElement.videoWidth;
-      this.canvas.nativeElement.height = this.video.nativeElement.videoHeight;
-    }
-
-    w = this.canvas.nativeElement.width;
-    h = this.canvas.nativeElement.height;
-    console.log(w + ' ' + h);
-
-    const context: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d');
-    context.drawImage(source? source : this.video.nativeElement, 0, 0, w, h);
-    const img: ImageData = context.getImageData(0, 0, w, h);
-    const qrCode: QRCode | null = jsQR(img.data, img.width, img.height, { inversionAttempts: 'dontInvert' });
-    if (qrCode) {
-      this.escaneando = false;
-      this.datosQR = qrCode.data;
-    }
-    return this.datosQR !== ''
-    ;
+  cerrarSesion() {
+    this.authService.logout();
   }
 
 }

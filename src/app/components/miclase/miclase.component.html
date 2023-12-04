@@ -1,0 +1,57 @@
+<ion-content [fullscreen]="true">
+  <ion-title class="ion-padding-top ion-text-center pantalla-con-padding-horizontal">
+    <ion-label class="pantalla-con-padding-horizontal">
+      <h1 class="texto-2">Quedaste presente en la</h1>
+      <h1 class="texto-2">siguiente asignatura:</h1>
+    </ion-label>
+  </ion-title>
+  <ion-card>
+    <ion-card-content>
+      <table>
+        <tr>
+          <td>Sede</td>
+          <td class="ion-padding-start">{{ asistencia.sede }}</td>
+        </tr>
+        <tr>
+          <td>Sigla</td>
+          <td class="ion-padding-start">{{ asistencia.idAsignatura }}</td>
+        </tr>
+        <tr>
+          <td>Sección</td>
+          <td class="ion-padding-start">{{ asistencia.seccion }}</td>
+        </tr>
+        <tr>
+          <td>Nombre asignatura</td>
+          <td class="ion-padding-start">{{ asistencia.nombreAsignatura }}</td>
+        </tr>
+        <tr>
+          <td>Nombre profesor</td>
+          <td class="ion-padding-start">{{ asistencia.nombreProfesor }}</td>
+        </tr>
+        <tr>
+          <td>Día</td>
+          <td class="ion-padding-start">{{ asistencia.dia }}</td>
+        </tr>
+        <tr>
+          <td>Bloque de Inicio</td>
+          <td class="ion-padding-start">{{ asistencia.bloqueInicio }}</td>
+        </tr>
+        <tr>
+          <td>Bloque de Término</td>
+          <td class="ion-padding-start">{{ asistencia.bloqueTermino }}</td>
+        </tr>
+        <tr>
+          <td>Hora de Inicio</td>
+          <td class="ion-padding-start">{{ asistencia.horaInicio }}</td>
+        </tr>
+        <tr>
+          <td>Hora de Fin</td>
+          <td class="ion-padding-start">{{ asistencia.horaFin }}</td>
+        </tr>
+      </table>
+    </ion-card-content>
+  </ion-card>
+  <div class="ion-padding-top ion-text-center">
+    <a class="texto-2" routerLink="/ingreso">Cerrar sesión</a>
+  </div>
+</ion-content>

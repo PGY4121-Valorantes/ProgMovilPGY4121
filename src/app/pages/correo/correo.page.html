@@ -1,5 +1,5 @@
 <ion-content>
-  <img class="pantalla-con-padding-horizontal" src="./assets/icon/logo_duoc.png">
+  <img class="pantalla-con-padding-horizontal" src="./assets/images/logo_duoc.png">
 
 
   <ion-title class="ion-padding-top ion-text-center pantalla-con-padding-horizontal">
@@ -17,18 +17,20 @@
       <ion-card-subtitle class="ion-text-center texto-2"> Recuperar contraseña </ion-card-subtitle>
       <br>
       <ion-card-subtitle class="ion-text-center texto-2"> Paso 1: Ingresa tu correo</ion-card-subtitle>
-      <ion-input class="texto-2" type="text" [(ngModel)]= "correo" placeholder="Ingresa tu correo" ></ion-input>
-      <ion-col size="12">
-   
-        <ion-button shape="block" (click)="ingresarPaginaValidarRespuestaSecreta()">Ingresar</ion-button>
-     </ion-col>
-     </ion-card>
+      <ion-item>
+        <ion-input [(ngModel)]="correo" type="text" label="Correo" labelPlacement="floating"></ion-input>
+      </ion-item>
+        <ion-col size="12">
+          <ion-button shape="block" (click)="ingresarPaginaPregunta()">
+            Recuperar contraseña
+          </ion-button>
+        </ion-col>
+    </ion-card>
   </div>
   <div class="ion-padding-top ion-text-center">
-    <a class="texto-2" routerLink="/ingreso"> Iniciar sesión </a>
+    <ion-button (click)="volverIngresar()" expand="block" fill="clear" shape="round">
+      Volver a ingreso
+    </ion-button>
   </div>
 
-
- </ion-content>
-
- 
+</ion-content>

@@ -1,6 +1,6 @@
 <ion-content >
 
-  <img class="pantalla-con-padding-horizontal" src="./assets/icon/logo_duoc.png">
+  <img class="pantalla-con-padding-horizontal" src="./assets/images/logo_duoc.png">
 
 
   <ion-title class="ion-padding-top ion-text-center pantalla-con-padding-horizontal">
@@ -16,17 +16,16 @@
 
       <ion-card-content>
         <ion-item>
-          <ion-label position="floating">Correo</ion-label>
-          <ion-input type="text" [(ngModel)]="usuario.correo"></ion-input>
+          <ion-input id="correo" [(ngModel)]="correo" type="text" label="Correo" labelPlacement="floating"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating" >Contraseña</ion-label>
-
-          <ion-input type="password" [(ngModel)]="usuario.password"></ion-input>
+          <ion-input id="password" [(ngModel)]="password" type="password" label="Contraseña" labelPlacement="floating"></ion-input>
         </ion-item>
         <ion-row>
           <ion-col size="12">
-            <ion-button class="color-boton" shape="block" (click)="ingresar()">Ingresar</ion-button>
+            <ion-button (click)="ingresar()">
+              Ingresar
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-card-content>
@@ -34,8 +33,10 @@
     <div class="ion-text-center ion-padding-vertical">
     <ion-label>
       <br>
-      <a class="texto-2" (click)="ingresarPaginaValidarCorreo()">Recuperar Contraseña </a>
-     </ion-label>
+      <ion-button (click)="ingresarPaginaValidarCorreo()" expand="block" fill="clear" shape="round">
+        Recuperar contraseña
+      </ion-button>
+    </ion-label>
     </div>
   </div>
   
